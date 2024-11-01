@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-param-reassign */
 
 'use client'
@@ -53,8 +54,17 @@ export const productCartSlice = createSlice({
       tempItems[action.payload.id].quantity -= 1
       state.items = tempItems
     },
+
+    removeProductById: (state, action) => {
+      const tempItems = { ...state.items }
+      if (!tempItems[action.payload]) return
+      if (tempItems[action.payload].quantity >= 1) {
+        delete tempItems[action.payload]
+        state.items = tempItems
+      }
+    },
   },
 })
 
-export const { addToCartProduct, removeFromCartProduct } =
+export const { addToCartProduct, removeFromCartProduct, removeProductById } =
   productCartSlice.actions
