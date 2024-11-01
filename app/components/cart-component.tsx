@@ -1,6 +1,6 @@
+/* eslint-disable no-alert */
 import { useGetCheckoutItems } from '@/lib/features/ProductState/ProductCartSelectors'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import circularPlusIcon from '@/public/assets/icons/circular-plus.svg'
 import circularMinusIcon from '@/public/assets/icons/circular-minus.svg'
@@ -57,7 +57,6 @@ const Cart: React.FC<CartProps> = ({ isOpen, closeDialog }) => {
                           data-slot="icon"
                         >
                           <path
-                            stroke-linecap="round"
                             stroke-linejoin="round"
                             d="M6 18 18 6M6 6l12 12"
                           />
@@ -88,14 +87,16 @@ const Cart: React.FC<CartProps> = ({ isOpen, closeDialog }) => {
                               <div>
                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                   <h3>
-                                    <button className="ine-clamp-2 max-w-full overflow-hidden text-ellipsis text-wrap text-left text-indigo-600 hover:text-indigo-500">
+                                    <button className="line-clamp-2 max-w-[132px] overflow-hidden text-ellipsis text-wrap text-left text-indigo-600 hover:text-indigo-500">
                                       {item.product.title}
                                     </button>
                                   </h3>
-                                  <div className="flex items-center">
-                                    <p className="ml-4 text-sm font-normal leading-[20px] text-[#5A6573]">
-                                      {item.quantity} x ৳{item.product.price}
-                                    </p>
+                                  <div className="flex items-start">
+                                    <div className="flex items-center">
+                                      <p className="ml-4 text-nowrap text-sm font-normal leading-[20px] text-[#5A6573]">
+                                        {item.quantity} x ৳{item.product.price}
+                                      </p>
+                                    </div>
                                     <p className="ml-2">
                                       ৳
                                       {(
@@ -109,16 +110,22 @@ const Cart: React.FC<CartProps> = ({ isOpen, closeDialog }) => {
                                 </p>
                               </div>
                               <div className="flex flex-1 items-end justify-between text-sm">
-                                <div className="flex gap-6">
-                                  <div>
+                                <div className="flex w-full justify-between">
+                                  <button
+                                    type="button"
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Remove
+                                  </button>
+                                  <div className="flex w-[calc(100%-72px)] justify-end gap-6">
                                     <button
                                       type="button"
                                       className="font-medium text-indigo-600 hover:text-indigo-500"
                                     >
                                       <Image
                                         src={circularPlusIcon}
-                                        width={18}
-                                        height={18}
+                                        width={20}
+                                        height={20}
                                         alt="add to cart"
                                       />
                                     </button>
@@ -128,58 +135,17 @@ const Cart: React.FC<CartProps> = ({ isOpen, closeDialog }) => {
                                     >
                                       <Image
                                         src={circularMinusIcon}
-                                        width={18}
-                                        height={18}
+                                        width={20}
+                                        height={20}
                                         alt="remove from cart"
                                       />
                                     </button>
                                   </div>
-                                  <button
-                                    type="button"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                  >
-                                    Remove
-                                  </button>
                                 </div>
                               </div>
                             </div>
                           </li>
                         ))}
-                        <li className="flex py-6">
-                          <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                            <Image
-                              src=""
-                              alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-                              className="h-full w-full object-cover object-center"
-                            />
-                          </div>
-
-                          <div className="ml-4 flex flex-1 flex-col">
-                            <div>
-                              <div className="flex justify-between text-base font-medium text-gray-900">
-                                <h3>
-                                  <Link href="/product/medium-stuff-satchel">
-                                    Medium Stuff Satchel
-                                  </Link>
-                                </h3>
-                                <p className="ml-4">$32.00</p>
-                              </div>
-                              <p className="mt-1 text-sm text-gray-500">Blue</p>
-                            </div>
-                            <div className="flex flex-1 items-end justify-between text-sm">
-                              <p className="text-gray-500">Qty 1</p>
-
-                              <div className="flex">
-                                <button
-                                  type="button"
-                                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                  Remove
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
                       </ul>
                     </div>
                   </div>
@@ -194,15 +160,21 @@ const Cart: React.FC<CartProps> = ({ isOpen, closeDialog }) => {
                     Shipping and taxes calculated at checkout.
                   </p>
                   <div className="mt-6">
-                    <button className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                    <button
+                      onClick={() =>
+                        alert('This feature is not implemented yet')
+                      }
+                      className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    >
                       Checkout
                     </button>
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
-                      or
+                      or{' '}
                       <button
                         type="button"
+                        onClick={closeDialog}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Continue Shopping
