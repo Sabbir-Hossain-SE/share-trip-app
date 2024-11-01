@@ -34,7 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
       className={`group relative inset-0 h-[332px] w-[210px] rounded-lg transition-all duration-200 ease-in-out hover:bg-white hover:p-1 ${getItemQuantity() && 'p-1'} hover:shadow-card ${getItemQuantity() && 'shadow-card'}`}
     >
       {getDiscounted() ? (
-        <button className="absolute left-[-4px] top-3 z-50">
+        <button className="absolute left-[-4px] top-3 z-10">
           <Image src={discountBadge} alt="Discount Badge" />
           <p className="absolute left-2 top-1 text-center text-[12px] font-[525] leading-[14px] tracking-[-0.02em]">
             {`- ৳ ${getDiscounted()}`}
